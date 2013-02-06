@@ -4,7 +4,7 @@ class Writer
 {
 public:
 	Writer(void);
-	~Writer(void);
+	virtual ~Writer(void);
 
-	virtual void Write(TCHAR **,int count) = 0;
+	virtual void Write(TCHAR *,int count) = 0;
 };

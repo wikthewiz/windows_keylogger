@@ -4,7 +4,7 @@ class Runnible
 {
 public:
 	Runnible(void);
-	~Runnible(void);
+	virtual ~Runnible(void);
 
 	void Enable();
 	void Disable();

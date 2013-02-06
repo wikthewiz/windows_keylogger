@@ -1,10 +1,7 @@
 #include "StdAfx.h"
 #include "Runnible.h"
 
-Runnible::Runnible(void)
-{
-	m_Enabled = false;
-}
+Runnible::Runnible(void):m_Enabled(false){}
 
 Runnible::~Runnible(void)
 {

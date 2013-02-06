@@ -6,7 +6,7 @@ class Buffer
 {
 public:
 	Buffer(void);
-	~Buffer(void);
+	virtual ~Buffer(void);
 
 	void Add(TCHAR c);
 	void GetBuffer(TCHAR buffer[], int count);
@@ -14,7 +14,6 @@ public:
 
 private:;
 	Queue<TCHAR> *m_buffer;
-
 	CRITICAL_SECTION m_writeLock;
 };
 

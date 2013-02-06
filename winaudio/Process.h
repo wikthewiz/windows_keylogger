@@ -7,7 +7,7 @@ class Process :
 {
 public:
 	Process(void);
-	~Process(void);
+	virtual ~Process(void);
 	
 	void SetIntervall(int tickInterval);
 	int GetIntervall();

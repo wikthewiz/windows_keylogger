@@ -2,23 +2,27 @@
 #include "FileWriter.h"
 #include <stdio.h>
 
-FileWriter::FileWriter(const TCHAR *fileName)
+FileWriter::FileWriter(const TCHAR *fileName):
+	m_pFile(NULL)
 {
 	m_strFileName = (TCHAR*) malloc( sizeof(TCHAR) * MAX_PATH );
 	swprintf_s( m_strFileName, MAX_PATH, fileName);
-	m_pFile = NULL;
 }
 
 FileWriter::~FileWriter(void)
 {
-	free(m_strFileName);
+	if (m_strFileName != NULL)
+	{
+		free(m_strFileName);
+		m_strFileName = NULL;
+	}
 }
 
-void FileWriter::Write(TCHAR ** str, int count)
+void FileWriter::Write(TCHAR *str, int count)
 {
 	if (OpenFile())
 	{
-		fwrite(*str, sizeof(TCHAR), count, m_pFile) ;
+		fwrite(str,  count, sizeof(TCHAR),m_pFile) ;
 		fflush(m_pFile);
 		CloseFile();
 	}
@@ -26,7 +30,7 @@ void FileWriter::Write(TCHAR ** str, int count)
 
 bool FileWriter::OpenFile()
 {
-	m_pFile = _wfopen(m_strFileName, L"a+, ccs=UNICODE");
+	m_pFile = _wfopen(m_strFileName, L"ab" /* "a+,ccs=UTF-8"*/);
 	return m_pFile != NULL;
 }
 void FileWriter::CloseFile()

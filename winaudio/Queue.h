@@ -55,9 +55,9 @@ private:
 	void enqueue(QueueElement<T> *element);
 	void deleteAll();
 	QueueElement<T> *m_first;
-	QueueElement<T> *m_last;;
-	CRITICAL_SECTION m_lock;
+	QueueElement<T> *m_last;
 	int m_count;
+	CRITICAL_SECTION m_lock;
 };
 
 

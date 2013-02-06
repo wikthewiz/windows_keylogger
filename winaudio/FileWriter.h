@@ -5,12 +5,12 @@ class FileWriter : public Writer
 {
 public:
 	FileWriter(const TCHAR * fileName);
-	~FileWriter(void);
+	virtual ~FileWriter(void);
 
-	void Write(TCHAR **,int count);
+	void Write(TCHAR *,int count);
 private:
-	TCHAR *m_strFileName;
 	FILE *m_pFile;
+	TCHAR *m_strFileName;
 
 	bool OpenFile();
 	void CloseFile();

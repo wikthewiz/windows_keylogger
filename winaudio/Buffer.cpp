@@ -1,14 +1,15 @@
 #include "StdAfx.h"
 #include "Buffer.h"
 
-Buffer::Buffer(void)
-{
-	m_buffer = new Queue<TCHAR>();
-}
+Buffer::Buffer(void):m_buffer(new Queue<TCHAR>()){}
 
 Buffer::~Buffer(void)
 {
-	delete m_buffer;
+	if (m_buffer != NULL)
+	{
+		delete m_buffer;
+		m_buffer = NULL;
+	}
 }
 
 void Buffer::Add(TCHAR c)

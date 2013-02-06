@@ -1,10 +1,10 @@
 #include "StdAfx.h"
 #include "Timer.h"
 
-Timer::Timer(long tick, void onTick(Timer *, LPVOID), LPVOID context)
+Timer::Timer(long tick, void onTick(Timer *, LPVOID), LPVOID context):
+	m_context(context)
 {
 	InitializeCriticalSection(&g_criticalSection);
-	m_context = context;
 	m_pOnTickCallback = onTick;
 	m_isEnabled = false;
 	m_exitThread = false;

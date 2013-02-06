@@ -5,12 +5,12 @@ template class Queue<DWORD>;
 template class Queue<TCHAR>;
 
 template <class T>
-Queue<T>::Queue()
+Queue<T>::Queue():
+	m_first(NULL),
+	m_last(NULL),
+	m_count(0)
 {
 	InitializeCriticalSection(&m_lock);
-	m_count = 0;
-	m_first = NULL;
-	m_last = NULL;
 }
 template <class T>
 Queue<T>::~Queue()

@@ -31,14 +31,6 @@ int VirtulKeyCodeToCharConverter::getKeyboardLayoutFile(TCHAR* layoutFile, DWORD
 	return 1;
 }
 
-//*******************************************************************
-// Author: Marc-André Moreau, Modified by mrW
-// Last update: April, 2010
-// Description: Replacement API for Microsoft's ToUnicode() function
-// You should load the current keyboard layout with loadKeyboardLayout()
-// before calling convertVirtualKeyToWChar()
-//*******************************************************************
-
 typedef PKBDTABLES(CALLBACK* KbdLayerDescriptor)(VOID);
 
 PVK_TO_WCHARS1 pVkToWchars1 = NULL;
@@ -141,10 +133,7 @@ int VirtulKeyCodeToCharConverter::ConvertToWChar(int virtualKey, PTCHAR outputCh
 
 		if(state & ~SHRT_MAX)
 		{
-			if(mod == 0)
-				mod = i + 1;
-			else
-				mod = 0; // Two modifiers at the same time!
+			mod = i + 1; // There might be two modifiers on the same time. But here we always choose the last
 		}
 		i++;
 	}

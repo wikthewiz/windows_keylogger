@@ -116,6 +116,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
+				FavorSizeOrSpeed="2"
 				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
@@ -178,6 +179,10 @@
 			</File>
 			<File
 				RelativePath=".\BufferWriterProcess.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\Crypto.cpp"
 				>
 			</File>
 			<File
@@ -255,6 +260,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\Crypto.h"
+				>
+			</File>
+			<File
 				RelativePath=".\FileWriter.h"
 				>
 			</File>
@@ -326,6 +335,18 @@
 			</File>
 			<File
 				RelativePath=".\winaudio.rc"
+				>
+			</File>
+		</Filter>
+		<Filter
+			Name="blowfish"
+			>
+			<File
+				RelativePath=".\blowfish.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\blowfish.h"
 				>
 			</File>
 		</Filter>

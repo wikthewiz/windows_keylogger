@@ -6,7 +6,7 @@ class Timer
 {
 public:
 	Timer(long tick, void onTick(Timer *, LPVOID),LPVOID context);
-	~Timer(void);
+	virtual ~Timer(void);
 
 	void Enable();
 	void Disable();
@@ -16,17 +16,18 @@ public:
 	void SetTick(long ticksInMillis);
 
 private:
-	static DWORD WINAPI  TickThread(LPVOID lpParam);
+	LPVOID m_context;
 	HANDLE m_hTickThread;
 	bool m_isEnabled;
-	void (*m_pOnTickCallback)(Timer*, LPVOID);
-	bool m_exitThread;
-	void dispose();
-	static void waitForEnabled(Timer *);
-	CRITICAL_SECTION g_criticalSection;
 	long ticksInMillis;
 	HANDLE m_hEnabledEvent;
-	LPVOID m_context;
+	bool m_exitThread;
+	CRITICAL_SECTION g_criticalSection;
+
+	static DWORD WINAPI TickThread(LPVOID lpParam);
+	void (*m_pOnTickCallback)(Timer*, LPVOID);
+	void dispose();
+	static void waitForEnabled(Timer *);
 };
 
 #if _DEBUG
