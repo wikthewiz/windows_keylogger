@@ -1,7 +1,8 @@
 windows_keylogger
 =================
+This is a windows key logger using blow fish to save key-strokes written sometime during 2009 and intended only for academic use, to test different virus protection.
 
-This is  windows key logger using blow fish to save key-strokes. This is only for academic use, to test different virus protection.
+(Moved from HG)
 
 How it is done
 ==============
